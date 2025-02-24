@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Volume Sankey Diagram</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Brain Volume Sankey Diagram</h1>
+    <div id="sankey-diagram"></div>
+
+    <script>
+        var data = {
+            "nodes": [
+                {"name": "Intracranial Volume"},
+                {"name": "Hemisphere_L"},
+                {"name": "Frontal_L"},
+                {"name": "Temporal_L"},
+                {"name": "Parietal_L"},
+                {"name": "Occipital_L"}
+            ],
+            "links": [
+                {"source": 0, "target": 1, "value": 531111},
+                {"source": 1, "target": 2, "value": 200000},
+                {"source": 1, "target": 3, "value": 150000},
+                {"source": 1, "target": 4, "value": 100000},
+                {"source": 1, "target": 5, "value": 81000}
+            ]
+        };
+
+        var sankeyData = {
+            type: "sankey",
+            orientation: "h",
+            node: {
+                pad: 15,
+                thickness: 20,
+                line: { color: "black", width: 0.5 },
+                label: data.nodes.map(d => d.name),
+            },
+            link: {
+                source: data.links.map(d => d.source),
+                target: data.links.map(d => d.target),
+                value: data.links.map(d => d.value),
+            }
+        };
+
+        var layout = { title: "Brain Volume Sankey Diagram" };
+
+        Plotly.newPlot('sankey-diagram', [sankeyData], layout);
+    </script>
+</body>
+</html>
